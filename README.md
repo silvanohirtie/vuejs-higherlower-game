@@ -5,7 +5,7 @@
     Modern and mobile-friendly Basic FullStack clone of the HigherLower famous game
     <br />
     <br />
-    <a href="https://github.com/silvanohirtie/twitter-clone/blob/master/server.js">View Demo</a>
+    <a href="https://higherlowerclone.netlify.app/">View Demo</a>
 </p>
 
 ## Made With
