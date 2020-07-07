@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Guess</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background-color:#121212">
+
+    <div id="app">
+      <h1 style="color:white">Points: {{points}}</h1>
+            <main>
+                <div class="half">
+                  <img :src="`${message.image}`" style="filter:opacity(30%)"></img>
+                  <div style="position:absolute; display:flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <h1 style="color:white;">{{ message.name }} has <br><span class="count">{{ message.search }}</span><br>searches</h1>
+                  </div>
+                </div>
+                <div class="secondhalf">
+                <img :src="`${message2.image}`" style="filter:opacity(30%)"></img>  
+                  <div style="position:absolute; display:flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <h1 style="color:white">{{ message2.name }} has </h1>
+                    <br>
+                    <button v-on:click="higherClick" style="color:white" class="button-primary" name="higherClick" ><i class="fa fa-arrow-up fa-2x" aria-hidden="true">Higher</i></button>
+                    <button v-on:click="lowerClick" style="color:white" class="button-primary" name="lowerClick" ><i class="fa fa-arrow-down fa-2x" aria-hidden="true">Lower</i></button>
+                    <br>
+                    <h1 style="color:white">Searches</h1>
+                  </div>
+                </div>
+            </main>
+        </div>
+  </div>
+  <script src="https://kit.fontawesome.com/b022257bf2.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+  <script>
+var searchList = {
+    "searches": [
+        {
+            "name": "Dog",
+            "search": "20000",
+            "image":"https://external-preview.redd.it/mBTEqbKvDiyHn1qhrqX3UzRKhll6J9tFv4W6HV0gLNg.jpg?auto=webp&s=78c3c3083e95feae141a025c05bc8bfb03b3dc2c"
+        },
+        {
+            "name": "Cat",
+            "search": "10000",
+            "image":"https://cdn.royalcanin-weshare-online.io/jyJEPmYBaxEApS7LtgZ4/v3/ec52h-older-cats-and-incontinence-causes-and-treatment-hero-cat?w=1440&auto=compress&fm=jpg"
+        },
+        {
+            "name": "Bird",
+            "search": "30000",
+            "image":"http://www.heyloveanimal.net/cdn/1920/2288/15/cd7b5c8d4687b5c98a445127926a56e2.jpg"
+        },
+        {
+          "name": "Banana",
+          "search": "50000",
+          "image":"https://s3-eu-central-1.amazonaws.com/pazienti-alimentazione/wp-content/uploads/2015/11/30152543/banana-1038x576.jpg"
+        },
+        {
+          "name": "Juice",
+          "search": "2000000",
+          "image":"https://www.modernhoney.com/wp-content/uploads/2018/09/Healthy-Juice-Cleanse-Recipes-1.jpg"
+        },
+        {
+          "name": "Apple",
+          "search": "50000000",
+          "image":"https://wallpapercave.com/wp/q1mol3G.jpg"
+        },
+        {
+          "name": "Grapes",
+          "search": "1000000",
+          "image":"https://media.istockphoto.com/vectors/red-and-white-table-grapes-wine-grapes-fresh-fruit-3d-vector-icon-set-vector-id945824076"
+        }
+    ]
+}
+var random = searchList.searches[Math.floor(Math.random() * searchList.searches.length)];
+var random2 = searchList.searches[Math.floor(Math.random() * searchList.searches.length)];
+if(random == random2){
+  random = searchList.searches[Math.floor(Math.random() * searchList.searches.length)]
+  random2 = searchList.searches[Math.floor(Math.random() * searchList.searches.length)]
+}
+function getNewValue(){
+          random = searchList.searches[Math.floor(Math.random() * searchList.searches.length)]
+          random2 = searchList.searches[Math.floor(Math.random() * searchList.searches.length)]
+          if(random == random2){
+            random = searchList.searches[Math.floor(Math.random() * searchList.searches.length)]
+            random2 = searchList.searches[Math.floor(Math.random() * searchList.searches.length)]
+          }
+          if(random == app.message) return random = searchList.searches[Math.floor(Math.random() * searchList.searches.length)]
+          if(random2 == app.message2) return random2 = searchList.searches[Math.floor(Math.random() * searchList.searches.length)]
+          app.message.name = random.name
+          app.message.search = random.search
+          app.message.image = random.image
+          app.message2.name = random2.name
+          app.message2.search = random2.search
+          app.message2.image = random2.image
+}
+var app = new Vue({
+      el: '#app',
+      data: {
+        message: random,
+        message2: random2,
+        points: 0
+      },
+      methods: {
+        higherClick: function (event) {
+        if(app.message.search < app.message2.search || app.message.search == app.message2.search) {
+          alert("Correct!")
+          app.points+=1
+          getNewValue()
+        } else {
+          alert("Not Correct!")
+          app.points = 0
+          getNewValue()
+        }
+      },
+      lowerClick: function (event) {
+        if(app.message.search > app.message2.search || app.message.search == app.message2.search) {
+          alert("Correct!")
+          app.points+=1
+          getNewValue()
+        } else {
+          alert("Not Correct!")
+          app.points = 0
+          getNewValue()
+        }
+      }
+
+    }
+})
+</script>
+
+</body>
+</html>

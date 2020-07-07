@@ -1,0 +1,43 @@
+* {
+    margin: 0; padding: 0;
+}
+html, body, #container {
+    height: 100%;
+    overflow: hidden;
+}
+#container {
+    position: relative;
+}
+header {
+    height: 50px;
+    background: gray;
+}
+main {
+    position: absolute;
+    width: 100%;
+    top: 50px;
+    bottom: 0;
+    background: transparent;
+}
+.half {
+    height: 60%;
+    display: flex; 
+    justify-content: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+.secondhalf {
+    height: 40%;
+    display: flex; 
+    justify-content: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+img{
+    position:fixed;
+    width: 100%;
+    height:56%
+}
